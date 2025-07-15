@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}
+{{post.title}}
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="main_100" style="background-image: url('{{ post.backdrop.url }}');">
+    <div class="main_99">
+      <div class="main_98">
+        <div class="main_97">
+          <img src="{{ post.poster.url }}" alt="{{ post.title }}" class="movie-image" />
+        </div>
+      </div>
+      <div class="main_96">
+        <h1 class="movie-title">{{post.title }}</h1>
+        <p class="movie-season">Released: {{ post.release }}</p>
+        <div class="main_92">
+          <span>
+            ⭐ <b id="imdb">{{post.rating }}</b>
+          </span>
+          <span>
+            🍿 <b id="audience">{{post.popularity }}</b>
+          </span>
+        </div>
+        <button class="watch-button">Watch for free</button>
+        <p class="description">{{post.overview }}</p>
+
+        <form method="post" action="{% url 'posts:like' slug=post.slug %}">
+          {% csrf_token %}
+          <button class="like" type="submit">👍 Like ({{ post.likes }})</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="cast">
+    <p>Cast of {{post.title}} </p>
+    <div class="cast_content">
+      {% for cast in casts %}
+      <div class="cast-preview">
+        <img src="{{cast.profile_path.url}}" alt="{{ cast.original_name }}" />
+        <h3 class="original_name">{{cast.original_name}}</h3>
+        <h5 class="name">{{cast.character}}</h5>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}

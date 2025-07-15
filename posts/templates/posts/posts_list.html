@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}
+On-demand
+{% endblock %}
+
+{% block content %}
+<article class="posts">
+<h2>Binge-Worthy Shows ></h2>
+<div class="scroll-container">
+{% for post in posts %}
+    <div class="post_1">
+        <a href="{% url 'posts:page' slug=post.slug %}">
+            <img class="poster" src="{{post.poster.url}}" alt="{{post.title}}">
+            <h2>{{ post.title }}</h2>
+        </a>
+    </div>
+{% endfor %}
+</div>
+<h2>Most Popular in india ></h2>
+<div class="scroll-container">
+{% for post in posts %}
+    <div class="post_1">
+        <a href="{% url 'posts:page' slug=post.slug %}">
+            <img class="poster" src="{{post.poster.url}}" alt="{{post.title}}">
+            <h2>{{ post.title }}</h2>
+        </a>
+    </div>
+{% endfor %}
+</div>
+</article>
+{% endblock %}
